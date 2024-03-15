@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Countdown Timer</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: black;
+        color: green;
+        text-align: center;
+        margin-top: 100px;
+    }
+    #countdown {
+        font-size: 48px;
+    }
+</style>
+</head>
+<body>
+<div id="countdown">30:00</div>
+
+<script>
+    // Set the countdown time in minutes
+    const countdownTime = 30;
+    let timer;
+
+    // Function to start the countdown
+    function startCountdown() {
+        const countdownElement = document.getElementById('countdown');
+        let timeLeft = countdownTime * 60;
+
+        timer = setInterval(() => {
+            const minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            countdownElement.innerHTML = `${minutes}:${seconds}`;
+
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                countdownElement.innerHTML = "Time's up!";
+            }
+
+            timeLeft--;
+        }, 1000);
+    }
+
+    // Start the countdown
+    startCountdown();
+
+    // Check if the code is entered correctly
+    document.addEventListener('keypress', function(e) {
+        if (e.key === '2') {
+            document.addEventListener('keypress', function(e) {
+                if (e.key === '0') {
+                    document.addEventListener('keypress', function(e) {
+                        if (e.key === '2') {
+                            clearInterval(timer);
+                            document.getElementById('countdown').innerHTML = "Vel gert, nú ferðist þið aftur til ársins 2024.";
+                        }
+                    });
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>
